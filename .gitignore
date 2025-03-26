@@ -1,0 +1,5 @@
+# ignore all executables and personal notes
+*.exe
+*.out
+*.org
+!README.org

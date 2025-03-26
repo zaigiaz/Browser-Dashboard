@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<html>
+  
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="startpage.css" media="screen" />
+<title>browser-dashboard</title>
+</head>
+
+<body>
+<div id="innerpage"> 
+
+<h1>[browser-dashboard]</h1>
+<div id='TIME'>
+<p></p>
+</div>
+
+<h2>Weather</h2>
+
+
+<div id="bar">
+<input type="text" placeholder="Enter Location..." id="link_id">
+<input type="button" id="link_str" value="Search" onClick="SearchBox()">
+<input type="button" id="refresh_weather" value="refresh" onClick="fetchData(97, 78)"
+</br> 
+</div>
+
+</br>
+<p id="location"></p>
+</br> 
+
+<div id="main_temp">
+ <img src="" id="main_img" width="50" height="50">
+  <div id="temp">
+    <p></p>
+    </br>
+    </div> 
+</div>
+
+  </br></br></br>
+
+  <div id="scrollmenu">
+  </div>
+  
+ <h3>Links</h3>
+
+<div id="linkcontainer">
+ <div id="general">
+<p id="linktext">_general_</p>
+<ul><a href="https://www.youtube.com/feed/subscriptions" target="_blank">Youtube</a></ul>
+<ul><a href="https://news.ycombinator.com/" target="_blank">Hacker News </a></ul>
+<ul><a href="https://old.reddit.com/" target="_blank">Reddit</a></ul>
+</div>
+
+<div id="work">
+<p id="linktext">work</p>
+<ul><a href="https://mail.google.com/mail" target="_blank">Email</a></ul>
+<ul><a href="https://github.com/login" target="_blank">Github</a></ul>
+<ul><a href="https://obsidian.md/" target="_blank">Notes</a></ul>
+</div>
+
+<div id="practice">
+<p id="linktext">_practice_</p>
+<ul><a href="https://arithmetic.zetamac.com/" target="_blank">Math</a></ul>
+<ul><a href="https://play.typeracer.com/" target="_blank">Typing</a></ul>
+<ul><a href="https://leetcode.com/problemset/" target="_blank">Leetcode</a></ul>
+</div>
+
+</div>
+
+
+ <h4>News </h4>
+<div id='newsdiv'>
+<p>Enter name of Subreddit:</p>
+ <input type="text" placeholder="Subreddit Name..." id="redsearch">
+ <input type="button" id="link_str" value="Search" onClick="getlinks()">
+  </br> </br> </br>
+ <input type="button" id="Techbutton" value="General News" onClick="reloadbutton(); getlinks('news');">
+ <input type="button" id="Techbutton" value="Politics" onClick="reloadbutton(); getlinks('Politic');">
+ <input type="button" id="Techbutton" value="Coding" onClick="reloadbutton(); getlinks('Code');">
+ <input type="button" id="reloadbutton" value="Clear-Screen" onClick="reloadbutton()">
+
+<div id="links">
+</div>
+</div>
+
+</div>
+</body>
+<script src="startpage.js"></script> 
+<html>
