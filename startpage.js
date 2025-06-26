@@ -8,8 +8,7 @@ fetchData(97, 78);
 
 }
 
-
-
+// Fetchs data for 
 async function fetchData(X, Y) {
     try {
 	const response1 = await fetch("https://api.weather.gov/gridpoints/LSX/" + X + "," + Y + "/forecast/hourly");
@@ -24,14 +23,14 @@ async function fetchData(X, Y) {
 	 container.textContent = '';}
 	
 	var jsondata1 = data1; 
-        var jsondata2 = data2;
+       var jsondata2 = data2;
 	//console.log(jsondata1, jsondata2); 
 	getWeather(jsondata1,jsondata2);
     }
     catch(error){console.error(error);}
 }
 
-
+// get weather temperature and icons from API
 function getWeather(jsondata1, jsondata2) {
     var temp = document.getElementById("temp");
     temp.innerHTML = jsondata1.properties.periods[0].temperature + jsondata1.properties.periods[0].temperatureUnit;
@@ -43,6 +42,7 @@ function getWeather(jsondata1, jsondata2) {
 }
 
 
+// Giant ineffiecent function that determines the weather icon given a code from the weather api
 function determineIcon(jsondata1, t) {
     var name = jsondata1.properties.periods[t].name;
     var iconlink = jsondata1.properties.periods[t].icon;
@@ -101,7 +101,7 @@ function determineIcon(jsondata1, t) {
     }
 }
 
-
+// get location (lat, lon) from string search
 async function SearchBox() {
     document.getElementById("scrollmenu").innerHTML = "";
     var search = document.getElementById('link_id').value;
@@ -121,7 +121,7 @@ async function SearchBox() {
     UpdateLocation(lat, lon);
 }
 
-
+// Update the location of the weather through given lat and lon
 async function UpdateLocation(lat, lon) {
 const gridpoints = "https://api.weather.gov/points/" + lat + "," + lon;
     try {
@@ -132,18 +132,18 @@ const gridpoints = "https://api.weather.gov/points/" + lat + "," + lon;
         const Xcoord = griddata.properties.gridX;
         const Ycoord = griddata.properties.gridY;
 
-//	console.log(griddata);
+       //console.log(griddata);
 	fetchData(Xcoord, Ycoord);
     }
     catch(error){console.error(error);}
 }
 
 
+// get the links and json files for the subreddits
 async function getlinks(passed) {    
     var name = document.getElementById("redsearch").value;
     if(passed == "news") {var url = ["https://old.reddit.com/r/news/hot.json","https://old.reddit.com/r/worldnews/hot.json" ];}
-    else if(passed == "Politic") {var url = ["https://old.reddit.com/r/Destiny/hot.json", "https://old.reddit.com/r/slatestarcodex/hot.json"]}
-    else if(passed == "Code") {var url = ["https://old.reddit.com/r/Emacs/hot.json", "https://old.reddit.com/r/Programming/hot.json"]}
+    else if(passed == "Code") {var url = ["https://old.reddit.com/r/Programming/hot.json", "https://old.reddit.com/r/Emacs/hot.json"]}
     else {var link = "https://www.reddit.com/r/" + name + "/hot.json"; var url = [link];}
 
     try {
@@ -158,6 +158,7 @@ async function getlinks(passed) {
 	catch(error){console.error(error)};
 }
 
+// append the reddit news stories to the menu 
 function appendlinks(linkdata) {
     const names = document.getElementById("links");
     names.appendChild(document.createElement("br"));
