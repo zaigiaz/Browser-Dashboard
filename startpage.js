@@ -1,51 +1,49 @@
 main();
 
 
-
 function main() {
 getTime();
 fetchData(97, 78);
 
 }
 
-// Fetchs data for 
+// Fetchs data for hourly and daily weather from weather api
 async function fetchData(X, Y) {
     try {
-	const response1 = await fetch("https://api.weather.gov/gridpoints/LSX/" + X + "," + Y + "/forecast/hourly");
-       const response2 = await fetch("https://api.weather.gov/gridpoints/LSX/" + X + "," + Y + "/forecast");
+	 var hourly_API = await fetch("https://api.weather.gov/gridpoints/LSX/" + X + "," + Y + "/forecast/hourly");
+        var daily_API = await fetch("https://api.weather.gov/gridpoints/LSX/" + X + "," + Y + "/forecast");
 
-        if((!response1.ok) && (!response2.ok)){throw new Error("Could not fetch response's");}
+        if(!(hourly_API.ok && daily_API.ok)) {throw new Error("Could not fetch response's");}
 	
-       const data1 = await response1.json();
-	const data2 = await response2.json();
+       var hourly = await hourly_API.json();
+	var daily = await daily_API.json();
+
 	if(X == 97 && Y == 78)
 	{document.getElementById('location').innerHTML = "Edwardsville, Illinois"; const container = document.getElementById('scrollmenu');
 	 container.textContent = '';}
 	
-	var jsondata1 = data1; 
-       var jsondata2 = data2;
-	//console.log(jsondata1, jsondata2); 
-	getWeather(jsondata1,jsondata2);
+
+	getWeather(daily, hourly);
     }
-    catch(error){console.error(error);}
+    catch(error) {console.error(error);}
 }
 
 // get weather temperature and icons from API
-function getWeather(jsondata1, jsondata2) {
+function getWeather(d_data, h_data) {
     var temp = document.getElementById("temp");
-    temp.innerHTML = jsondata1.properties.periods[0].temperature + jsondata1.properties.periods[0].temperatureUnit;
+    temp.innerHTML = d_data.properties.periods[0].temperature + d_data.properties.periods[0].temperatureUnit;
     
     var a = document.getElementById('main_img'); 
 
-    scrollmenu(jsondata1,jsondata2);
-    a.src = determineIcon(jsondata1, 0);
+    scrollmenu(d_data, h_data);
+    a.src = determineIcon(d_data, 0);
 }
 
 
 // Giant ineffiecent function that determines the weather icon given a code from the weather api
-function determineIcon(jsondata1, t) {
-    var name = jsondata1.properties.periods[t].name;
-    var iconlink = jsondata1.properties.periods[t].icon;
+function determineIcon(d_data, t) {
+    var name = d_data.properties.periods[t].name;
+    var iconlink = d_data.properties.periods[t].icon;
 
     var iconN = iconlink.slice(35, 42);
     console.log(iconN, iconlink); 
@@ -190,15 +188,15 @@ container.textContent = '';
 }
 
 
-function scrollmenu(jsondata1, jsondata2){
+function scrollmenu(d_data, h_data){
     for(var t = 1; t < 10; t++){
-    var temp = jsondata1.properties.periods[t].temperature + jsondata1.properties.periods[t].temperatureUnit;
+    var temp = d_data.properties.periods[t].temperature + d_data.properties.periods[t].temperatureUnit;
     const p = document.createElement("p");  p.innerHTML = temp;
     var img = document.createElement("img");
     var divName = "childDiv" + t;
     const childDiv = document.createElement("div"); childDiv.style.id = (divName);
 	
-    img.src = determineIcon(jsondata1, t);
+    img.src = determineIcon(d_data, t);
     img.width = "30"; img.height = "30"; 
     const headdiv = document.getElementById('scrollmenu');
 
@@ -213,6 +211,7 @@ function scrollmenu(jsondata1, jsondata2){
     }
 }
 
+// determines the background image based on the weather code given
 function determineBackground(code) {
     day = "linear-gradient(224deg, #EBFF00FF 0.5%, #EBFF00FF 1%, #71C4FFFF 40%)";
     night = "linear-gradient(224deg, #663399 1%, #663399 1%, #006db0 80%)";
@@ -224,6 +223,7 @@ function determineBackground(code) {
 }
 
 
+// gets time to display on top right corner
 function getTime() {
     var times = document.getElementById("TIME");
 
