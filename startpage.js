@@ -9,7 +9,9 @@ async function fetchData(X, Y) {
  
         const data1 = await response1.json();
 	const data2 = await response2.json();
-	
+	if(X == 97 && Y == 78)
+ {document.getElementById('location').innerHTML = "Edwardsville, Illinois"; const container = document.getElementById('scrollmenu');
+  container.textContent = '';}
        
 	var jsondata1 = data1; 
         var jsondata2 = data2;
@@ -47,6 +49,7 @@ function determineIcon(jsondata1, t) {
     else if(iconN == "night/t") {return "img/nThunder.png"}
     else if((iconN == "night/b") || (iconN == "night/o")) {if(t==0){determineBackground("night");} return "img/day_windy.png"}
     else if(iconN == "night/r") {if(t==0){determineBackground("night");} return "img/rain_night.png";}
+    else if(iconN == "day/sno") {if(t==0){determineBackground("cloud");} return "img/snow.png";}
 }
 
 
@@ -90,6 +93,7 @@ const gridpoints = "https://api.weather.gov/points/" + lat + "," + lon;
 async function getlinks(passed) {    
     var name = document.getElementById("redsearch").value;
     if(passed == "news") {var url = ["https://old.reddit.com/r/news/hot.json","https://old.reddit.com/r/worldnews/hot.json" ];}
+    else if(passed == "Politic") {var url = ["https://old.reddit.com/r/Destiny/hot.json", "https://old.reddit.com/r/slatestarcodex/hot.json"]}
     else if(passed == "Code") {var url = ["https://old.reddit.com/r/Emacs/hot.json", "https://old.reddit.com/r/Programming/hot.json"]}
        else {var link = "https://www.reddit.com/r/" + name + "/hot.json"; var url = [link];}
 
