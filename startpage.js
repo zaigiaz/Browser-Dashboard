@@ -37,9 +37,14 @@ function determineIcon(jsondata1, t) {
     var name = jsondata1.properties.periods[t].name;
     var iconlink = jsondata1.properties.periods[t].icon;
 
+    // Icon link is a slice of a json string to identify what the weather is, pretty scuffed but works correctly
     var iconN = iconlink.slice(35, 42);
+
+    // log icon Link so easier to see in future
     console.log(iconN, iconlink); 
 
+
+    // terrifying block of code that may be rewritten some day
     if(iconN == "night/f") {if(t==0){determineBackground("night");}return "img/clear_night.png";}
     else if((iconN == "day/skc") || (iconN == "day/few") || (iconN == "day/hot")) {if(t==0){determineBackground("day");} return "img/Sunny.png";}
     else if((iconN == "day/sct") || (iconN == "day/bkn") || (iconN == "day/ovc")) {if(t==0){determineBackground("cloud");} return "img/cloudy_weather.png";}
@@ -51,9 +56,11 @@ function determineIcon(jsondata1, t) {
     else if(iconN == "night/r") {if(t==0){determineBackground("night");} return "img/rain_night.png";}
     else if(iconN == "day/sno") {if(t==0){determineBackground("cloud");} return "img/snow.png";}
     else if(iconN == "day/col") {if(t==0){determineBackground("cloud");} return "img/cold.png";}
+    else if(iconN == "night/c") {if(t==0){determineBackground("night");} return "img/cold.png";}
 }
 
 
+// search box for geodata API
 async function SearchBox() {
     document.getElementById("scrollmenu").innerHTML = "";
     var search = document.getElementById('link_id').value;
@@ -74,6 +81,7 @@ async function SearchBox() {
 }
 
 
+// takes lat and lon and updates weather api
 async function UpdateLocation(lat, lon) {
 const gridpoints = "https://api.weather.gov/points/" + lat + "," + lon;
     try {
@@ -91,6 +99,7 @@ const gridpoints = "https://api.weather.gov/points/" + lat + "," + lon;
 }
 
 
+// get links from reddit or alternatively search for json by just using search bar
 async function getlinks(passed) {    
     var name = document.getElementById("redsearch").value;
     if(passed == "news") {var url = ["https://old.reddit.com/r/news/hot.json","https://old.reddit.com/r/worldnews/hot.json" ];}
@@ -109,6 +118,7 @@ async function getlinks(passed) {
 	catch(error){console.error(error)};
 }
 
+// scuffed logic that also works
 function appendlinks(linkdata) {
     const names = document.getElementById("links");
     names.appendChild(document.createElement("br"));
@@ -140,6 +150,7 @@ container.textContent = '';
 }
 
 
+// menu for weather icons and temperatures shown
 function scrollmenu(jsondata1, jsondata2){
     for(var t = 1; t < 10; t++){
     var temp = jsondata1.properties.periods[t].temperature + jsondata1.properties.periods[t].temperatureUnit;
@@ -163,6 +174,7 @@ function scrollmenu(jsondata1, jsondata2){
     }
 }
 
+// determines the background image based on weather 
 function determineBackground(code) {
     day = "linear-gradient(224deg, #EBFF00FF 0.5%, #EBFF00FF 1%, #71C4FFFF 40%)";
     night = "linear-gradient(224deg, #663399 1%, #663399 1%, #006db0 80%)";
@@ -174,6 +186,7 @@ function determineBackground(code) {
 }
 
 
+// stack-overflow function to get time-stamp 
 function getTime() {
     var times = document.getElementById("TIME");
 

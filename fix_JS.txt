@@ -1,12 +1,6 @@
-switch(expression) {
-  case x:
-    // code block
-    break;
-  case y:
-    // code block
-    break;
-  default:
-    // code block
-} 
+* Another idea
+the big block of code already has DetermineBackground() has a nested if statement
+how about we just pull that out initially to simplify the logic?
 
-for the icon changing function
+
+create some global constants so you're not re-declaring stuff all the time
