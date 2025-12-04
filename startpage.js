@@ -50,6 +50,7 @@ function determineIcon(jsondata1, t) {
     else if((iconN == "night/b") || (iconN == "night/o")) {if(t==0){determineBackground("night");} return "img/day_windy.png"}
     else if(iconN == "night/r") {if(t==0){determineBackground("night");} return "img/rain_night.png";}
     else if(iconN == "day/sno") {if(t==0){determineBackground("cloud");} return "img/snow.png";}
+    else if(iconN == "day/col") {if(t==0){determineBackground("cloud");} return "img/cold.png";}
 }
 
 
@@ -93,7 +94,6 @@ const gridpoints = "https://api.weather.gov/points/" + lat + "," + lon;
 async function getlinks(passed) {    
     var name = document.getElementById("redsearch").value;
     if(passed == "news") {var url = ["https://old.reddit.com/r/news/hot.json","https://old.reddit.com/r/worldnews/hot.json" ];}
-    else if(passed == "Politic") {var url = ["https://old.reddit.com/r/Destiny/hot.json", "https://old.reddit.com/r/slatestarcodex/hot.json"]}
     else if(passed == "Code") {var url = ["https://old.reddit.com/r/Emacs/hot.json", "https://old.reddit.com/r/Programming/hot.json"]}
        else {var link = "https://www.reddit.com/r/" + name + "/hot.json"; var url = [link];}
 
