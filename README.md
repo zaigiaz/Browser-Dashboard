@@ -1,6 +1,6 @@
 # [Browser-Dashboard]
 Browser-Dashboard is a startpage that can show weather for any location in the United States, display links for websites, 
-and search and read subreddit posts using multiple API endpoints.
+and search and read subreddit posts using multiple API endpoints, with the Restful API structure.
 
 # How To Use:
 
